@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
 import 'brands_products_screen.dart';
+import 'widgets/floating_cart_button.dart';
 
 class SubcategoryScreen extends StatelessWidget {
   final Category category;
@@ -14,6 +15,7 @@ class SubcategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const FloatingCartButton(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

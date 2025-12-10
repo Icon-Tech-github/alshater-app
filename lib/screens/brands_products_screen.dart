@@ -3,6 +3,7 @@ import 'package:alshaatir/screens/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import 'widgets/floating_cart_button.dart';
 
 class BrandsProductsScreen extends StatefulWidget {
   final Subcategory subcategory;
@@ -34,7 +35,7 @@ class _BrandsProductsScreenState extends State<BrandsProductsScreen> {
         .toList();
 
     return Scaffold(
-
+      floatingActionButton: const FloatingCartButton(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

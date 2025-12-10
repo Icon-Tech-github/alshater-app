@@ -9,7 +9,10 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red.shade700,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
+        color: Colors.red.shade700,
+      ),
       padding: const EdgeInsets.all(
           16),
       child: Column(
@@ -48,7 +51,7 @@ class Header extends StatelessWidget {
               ),
             ],
           ),
-          // const SizedBox(height: 12),
+           const SizedBox(height: 12),
           // Row(
           //   children: [
           //     const Icon(Icons.location_on, color: Colors.white),

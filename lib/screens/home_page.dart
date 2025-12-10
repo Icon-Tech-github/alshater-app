@@ -9,6 +9,7 @@ import 'package:alshaatir/screens/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import 'widgets/floating_cart_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const FloatingCartButton(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

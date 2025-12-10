@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../cart_screen.dart';
+import '../offers_screen.dart';
+import '../orders_screen.dart';
+import '../more_screen.dart';
+
 class BottomNav extends StatelessWidget {
-  const BottomNav();
+  final int currentIndex;
+
+  const BottomNav({super.key, this.currentIndex = 4});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: 4,
+      currentIndex: currentIndex,
       selectedItemColor: Colors.red.shade700,
       unselectedItemColor: Colors.grey,
       items: const [
@@ -21,7 +28,31 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.home_filled), label: 'الرئيسية'),
       ],
-      onTap: (_) {},
+      onTap: (index) {
+        if (index == currentIndex) return;
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const MoreScreen()),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const OrdersScreen()),
+          );
+        } else if (index == 2) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const CartScreen()),
+          );
+        } else if (index == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const OffersScreen()),
+          );
+        }
+        // index 4 (home) or 0 (more) left as-is.
+      },
     );
   }
 }
