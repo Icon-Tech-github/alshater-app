@@ -141,50 +141,50 @@ const List<Category> categories = [
       Subcategory(
         name: 'مياه',
         imageUrl:
-        'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+        'https://aquadelta.net/wp-content/uploads/2025/04/1500.webp',
         products: [
           Product(
             name: 'مياه طبيعية',
             brand: 'Nestlé Pure Life',
-            brandImage: 'https://m.media-amazon.com/images/I/',
+            brandImage: 'https://aquadelta.net/wp-content/uploads/2025/04/1500.webp',
             size: '1.5 لتر',
             price: 2.5,
             imageUrl:
-            'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+            'https://aquadelta.net/wp-content/uploads/2025/04/1500.webp',
           ),
           Product(
             name: 'مياه معدنية',
             brand: 'Aquafina',
-            brandImage: 'https://m.media-amazon.com/images/',
+            brandImage: 'https://www.nestlepurelife.com/lb/sites/g/files/xknfdk496/files/2018-11/33ml%20Small-Pure-Quality-Water.png.png',
             size: '1.5 لتر',
             price: 2.0,
             imageUrl:
-            'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+            'https://www.nestlepurelife.com/lb/sites/g/files/xknfdk496/files/2018-11/33ml%20Small-Pure-Quality-Water.png.png',
           ),
         ],
       ),
       Subcategory(
         name: 'عصائر',
         imageUrl:
-        'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+        'https://mcprod.hyperone.com.eg/media/catalog/product/cache/8d4e6327d79fd11192282459179cc69e/6/2/6222014336133_2_.png',
         products: [
           Product(
             name: 'عصير برتقال',
             brand: 'Tropicana',
-            brandImage: 'https://m.media-amazon.com/images/I/',
+            brandImage: 'https://mcprod.hyperone.com.eg/media/catalog/product/cache/8d4e6327d79fd11192282459179cc69e/6/2/6222014336133_2_.png',
             size: '1 لتر',
             price: 8.5,
             imageUrl:
-            'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+            'https://mcprod.hyperone.com.eg/media/catalog/product/cache/8d4e6327d79fd11192282459179cc69e/6/2/6222014336133_2_.png',
           ),
           Product(
             name: 'عصير تفاح',
             brand: 'Rani',
-            brandImage: 'https://m.media-amazon.com/images/I/',
+            brandImage: 'https://mcprod.hyperone.com.eg/media/catalog/product/cache/8d4e6327d79fd11192282459179cc69e/6/2/6222014336133_2_.png',
             size: '1 لتر',
             price: 7.5,
             imageUrl:
-            'https://m.media-amazon.com/images/I/71kOZFHrraL._AC_UF894,1000_QL80_.jpg',
+            'https://mcprod.hyperone.com.eg/media/catalog/product/cache/8d4e6327d79fd11192282459179cc69e/6/2/6222014336133_2_.png',
           ),
         ],
       ),
