@@ -57,7 +57,7 @@ class ProductCard extends StatelessWidget {
                       child: Icon(
                         isFav ? Iconsax.heart : Iconsax.heart,
                         size: 18,
-                        color: isFav ? AppColors.primary : Colors.grey,
+                        color: isFav ? Colors.red : Colors.grey,
                       ),
                     ),
                   );
