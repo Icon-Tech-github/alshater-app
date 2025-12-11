@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -50,7 +49,7 @@ class MoreScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = items[index];
                   return ListTile(
-                    leading: Icon(item.icon, color: firstColor.withOpacity(.5)),
+                    leading: Icon(item.icon, color: Colors.red.withOpacity(.5)),
                     title: Text(
                       item.title,
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
@@ -88,10 +87,10 @@ class MoreScreen extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
-                  icon: const Icon(Icons.logout, color: firstColor),
+                  icon: const Icon(Icons.logout, color: Colors.red),
                   label: const Text(
                     'تسجيل خروج',
-                    style: TextStyle(color: firstColor),
+                    style: TextStyle(color: Colors.red),
                   ),
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.red.shade700, width: 1.2),

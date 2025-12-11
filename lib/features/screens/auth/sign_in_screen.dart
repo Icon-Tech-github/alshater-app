@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/constants/colors.dart';
 import 'package:alshaatir/features/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -148,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: firstColor,
+                          backgroundColor: Colors.red,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
