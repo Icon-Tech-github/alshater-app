@@ -1,4 +1,4 @@
-import 'package:alshaatir/screens/home_page.dart';
+import 'package:alshaatir/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +37,11 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xfff5f5f5),
           fontFamily: 'Roboto',
         ),
-        home: const Directionality(
+        builder: (context, child) => Directionality(
           textDirection: TextDirection.rtl,
-          child: HomePage(),
+          child: child ?? const SizedBox.shrink(),
         ),
+        home: const SignInScreen(),
       ),
     );
   }
