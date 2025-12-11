@@ -11,13 +11,11 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      _MoreItem('المنتجات المفضلة', Icons.favorite_border),
-      _MoreItem('الإشعارات', Icons.notifications_none),
-      _MoreItem('العناوين', Icons.location_on_outlined),
-      _MoreItem('الدعم', Icons.headset_mic_outlined),
-      _MoreItem('الإعدادات', Icons.settings_outlined),
-      _MoreItem('الشكاوى', Icons.help_outline),
-      _MoreItem('حول التطبيق', Icons.info_outline),
+      _MoreItem('المنتجات المفضلة', Iconsax.heart),
+      _MoreItem('الإشعارات', Iconsax.notification),
+      _MoreItem('العناوين', Iconsax.location),
+      _MoreItem('الإعدادات', Iconsax.setting),
+      _MoreItem('حول التطبيق', Iconsax.info_circle),
     ];
 
     return Scaffold(
@@ -41,7 +39,7 @@ class MoreScreen extends StatelessWidget {
                       item.title,
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                     ),
-                    trailing: const Icon(Icons.chevron_right),
+                    trailing: const Icon(Iconsax.arrow_left_2_copy,color: AppColors.primary,),
                     onTap: () {},
                   );
                 },
@@ -74,7 +72,7 @@ class MoreScreen extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
-                  icon: const Icon(Icons.logout, color: AppColors.error),
+                  icon: const Icon(Iconsax.logout, color: AppColors.error),
                   label: const Text(
                     'تسجيل خروج',
                     style: TextStyle(color: AppColors.error),

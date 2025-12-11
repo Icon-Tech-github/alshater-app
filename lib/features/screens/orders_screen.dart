@@ -79,42 +79,65 @@ class _OrdersList extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {
         final order = orders[index];
-        return Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade200),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return Stack(
+          children: [
+            // MAIN CARD
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade200),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'طلب #${order.id}',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'طلب #${order.id}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                      Text(
+                        '${order.total.toStringAsFixed(2)} ج.م',
+                        style: TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 6),
+                  Text(order.status, style: const TextStyle(color: Colors.grey)),
+                  const SizedBox(height: 6),
                   Text(
-                    '${order.total.toStringAsFixed(2)} ج.م',
-                    style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold),
+                    'التاريخ: ${order.date.toLocal().toString().split('.').first}',
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
-              Text(order.status, style: const TextStyle(color: Colors.grey)),
-              const SizedBox(height: 6),
-              Text(
-                'التاريخ: ${order.date.toLocal().toString().split('.').first}',
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+
+            // RIGHT ROUNDED BORDER
+            Positioned(
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: Container(
+                width: 6,
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
+
       },
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemCount: orders.length,
