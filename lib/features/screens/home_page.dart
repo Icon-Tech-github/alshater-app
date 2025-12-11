@@ -7,6 +7,7 @@ import 'package:alshaatir/features/screens/widgets/horizontal_product_list.dart'
 import 'package:alshaatir/features/screens/widgets/promo_banner.dart';
 import 'package:alshaatir/features/screens/widgets/section_header.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import '../models/category_model.dart';
 import 'widgets/floating_cart_button.dart';
@@ -26,7 +27,11 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 12),
             const PromoBanner(),
             const SizedBox(height: 16),
-            SectionHeader(title: 'الأقسام', onTapSeeAll: () {}),
+            SectionHeader(
+              title: 'الأقسام',
+              icon: Iconsax.category,
+              onTapSeeAll: () {},
+            ),
             const SizedBox(height: 10),
             CategoryGrid(
               categories: categories,
@@ -40,11 +45,18 @@ class HomePage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 12),
-            SectionHeader(title: 'الشركات', onTapSeeAll: () {}),
+            SectionHeader(
+              title: 'الشركات',
+              icon: Iconsax.shop,
+              onTapSeeAll: () {},
+            ),
             const SizedBox(height: 10),
             const BrandStrip(),
             const SizedBox(height: 24),
-            const SectionHeader(title: 'الأكثر مبيعاً'),
+            SectionHeader(
+              title: 'الأكثر مبيعاً',
+              icon: Iconsax.star,
+            ),
             const SizedBox(height: 10),
             HorizontalProductList(
               products: categories
@@ -54,7 +66,10 @@ class HomePage extends StatelessWidget {
                   .toList(),
             ),
             const SizedBox(height: 24),
-            const SectionHeader(title: 'العروض'),
+            SectionHeader(
+              title: 'العروض',
+              icon: Iconsax.tag,
+            ),
             const SizedBox(height: 10),
             HorizontalProductList(
               products: categories

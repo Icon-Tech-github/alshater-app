@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/features/screens/widgets/floating_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-                color: Colors.red.shade700,
+                color: AppColors.primary,
               ),
               padding: const EdgeInsets.all(
                   16),
@@ -124,7 +125,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               IconButton(
                                 onPressed: () => cart.increment(product.name),
                                 icon: const Icon(Icons.add_circle_outline),
-                                color: Colors.red.shade700,
+                                color: AppColors.primary,
                               ),
                             ],
                           ),
@@ -146,7 +147,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade700,
+                            backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
@@ -170,7 +171,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red.shade700,
+                          color: AppColors.primary,
                         ),
                       ),
                     ],

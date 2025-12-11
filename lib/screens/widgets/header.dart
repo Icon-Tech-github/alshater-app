@@ -4,10 +4,12 @@ import 'package:alshaatir/core/app_colors.dart';
 class Header extends StatelessWidget {
   final String searchHint;
   final String? userName;
+  final String? userImageUrl;
 
   const Header({
     required this.searchHint,
     this.userName,
+    this.userImageUrl,
   });
 
   @override
@@ -21,13 +23,8 @@ class Header extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             AppColors.primary,
-            AppColors.primary,
+            AppColors.info,
           ],
-        ),
-        image: DecorationImage(
-          image: AssetImage('assets/imeges/bg-heder.png'),
-          fit: BoxFit.cover,
-          opacity: 0.3,
         ),
       ),
       padding: const EdgeInsets.all(16),
@@ -61,21 +58,27 @@ class Header extends StatelessWidget {
                   ],
                 ),
               ),
-              // شعار التطبيق
+              // صورة المستخدم
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(12),
-                  // border: Border.all(color: Colors.grey, width: 1),
+                  border: Border.all(color: Colors.white, width: 2),
+                  color: AppColors.light,
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(11),
-                  child: Image.asset(
-                    'assets/imeges/logo-png.png',
-                    fit: BoxFit.contain,
-                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  child: userImageUrl != null
+                      ? Image.network(
+                          userImageUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return _defaultAvatar();
+                          },
+                        )
+                      : _defaultAvatar(),
                 ),
               ),
             ],
@@ -154,4 +157,14 @@ class Header extends StatelessWidget {
     );
   }
 
+  Widget _defaultAvatar() {
+    return Container(
+      color: AppColors.light,
+      child: const Icon(
+        Icons.person,
+        color: AppColors.primary,
+        size: 30,
+      ),
+    );
+  }
 }

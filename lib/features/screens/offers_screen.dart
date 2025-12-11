@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 
@@ -62,8 +63,8 @@ class OffersScreen extends StatelessWidget {
                         children: [
                           Chip(
                             label: Text(offer['code']!),
-                            backgroundColor: Colors.red.shade50,
-                            labelStyle: TextStyle(color: Colors.red.shade700),
+                            backgroundColor: AppColors.background,
+                            labelStyle: TextStyle(color: AppColors.primary),
                           ),
                           const Spacer(),
                           TextButton(

@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/features/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -176,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: AppColors.primary,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),

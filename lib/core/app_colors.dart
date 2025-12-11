@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._(); // Private constructor to prevent instantiation
 
-  // الألوان الأساسية من لوحة الألوان
-  // Primary Colors from Color Palette
-
   /// الأزرق الداكن - اللون الأساسي
   /// Deep Blue - Primary Color
   static const Color primary = Color(0xFF145CDB);

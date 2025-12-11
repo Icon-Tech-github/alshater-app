@@ -17,43 +17,59 @@ class SubcategoryScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: const FloatingCartButton(),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        //  const SearchBar(),
+          // الهيدر ثابت في الأعلى
           Header(searchHint: 'إبحث'),
-          const SizedBox(height: 18),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(category.name, style: const TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
-          ),
-          const SizedBox(height: 18),
-          const PromoBanner(),
-          const SizedBox(height: 50),
+          // باقي المحتوى قابل للتمرير
           Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 0.8,
-              ),
-              itemCount: category.subcategories.length,
-              itemBuilder: (context, index) {
-                final sub = category.subcategories[index];
-                return SubCategoryTile(
-                  title: sub.name,
-                  imageUrl: sub.imageUrl,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            BrandsProductsScreen(subcategory: sub),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 18),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      category.name,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  const PromoBanner(),
+                  const SizedBox(height: 18),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 0.8,
                       ),
-                    );
-                  },
-                );
-              },
+                      itemCount: category.subcategories.length,
+                      itemBuilder: (context, index) {
+                        final sub = category.subcategories[index];
+                        return SubCategoryTile(
+                          title: sub.name,
+                          imageUrl: sub.imageUrl,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    BrandsProductsScreen(subcategory: sub),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ],
