@@ -1,3 +1,4 @@
+import 'package:alshaatir/features/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../home_page.dart';
@@ -188,6 +189,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('لديك حساب؟'),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const SignInScreen()),
+                    );
+                  },
+                  child: const Text('تسجيل دخول'),
+                ),
+              ],
             ),
           ],
         ),

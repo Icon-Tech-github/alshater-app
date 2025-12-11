@@ -1,3 +1,5 @@
+import 'package:alshaatir/features/screens/home_page.dart';
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,31 +29,29 @@ class SuccessScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-              color: Colors.red.shade700,
-            ),
-            padding: const EdgeInsets.all(
-                16),
+          const DefaultHeader(
+            title: "تأكيد الطلب",
+            height: 60,
+          ),
+          const SizedBox(height: 40),
+          Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 40,),
-                Text('تأكيد الطلب',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white))
+                Icon(Icons.check_circle,
+                    size: 250, color: Colors.green.shade600),
+                const SizedBox(height: 28),
+                const Text(
+                  'تم ارسال طلبك بنجاح وسوف يتم التواصل معك',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28),
+                ),
               ],
             ),
-          ),
-          const SizedBox(height: 32),
-          Icon(Icons.check_circle,
-              size: 250, color: Colors.green.shade600),
-          const SizedBox(height: 28),
-
-          const Text(
-            'تم ارسال طلبك بنجاح وسوف يتم التواصل معك',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 28),
           ),
           const Spacer(),
           Padding(
@@ -60,8 +60,10 @@ class SuccessScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  context.read<CartProvider>().clearCart();
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (_) => const HomePage()),
+                        (route) => false, // removes all previous routes
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red.shade700,

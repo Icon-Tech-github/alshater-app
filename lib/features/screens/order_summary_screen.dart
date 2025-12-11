@@ -1,3 +1,4 @@
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,17 +11,12 @@ class OrderSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('مراجعة الطلب'),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
-        elevation: 0.5,
-      ),
       body: Consumer<CartProvider>(
         builder: (context, cart, _) {
           return Column(
             children: [
+              const DefaultHeader(title: "مراجعة الطلب",height: 60,),
+              const SizedBox(height: 16),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.all(16),

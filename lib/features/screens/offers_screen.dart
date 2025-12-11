@@ -1,3 +1,4 @@
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
@@ -26,58 +27,60 @@ class OffersScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('العروض'),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
-        elevation: 0.4,
-      ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          final offer = offers[index];
-          return Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200),
+
+      body: Column(
+        children: [
+          const DefaultHeader(title: "العروض",height: 60,),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                final offer = offers[index];
+                return Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade200),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        offer['title']!,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        offer['subtitle']!,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Chip(
+                            label: Text(offer['code']!),
+                            backgroundColor: Colors.red.shade50,
+                            labelStyle: TextStyle(color: Colors.red.shade700),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('تطبيق'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              separatorBuilder: (_, __) => const SizedBox(height: 12),
+              itemCount: offers.length,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  offer['title']!,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  offer['subtitle']!,
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Chip(
-                      label: Text(offer['code']!),
-                      backgroundColor: Colors.red.shade50,
-                      labelStyle: TextStyle(color: Colors.red.shade700),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('تطبيق'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemCount: offers.length,
+          ),
+        ],
       ),
       bottomNavigationBar: const BottomNav(currentIndex: 3),
     );
