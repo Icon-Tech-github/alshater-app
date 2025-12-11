@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:alshaatir/core/app_colors.dart';
 
 import '../cart_screen.dart';
 import '../offers_screen.dart';
@@ -15,7 +16,7 @@ class BottomNav extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
-      selectedItemColor: Colors.red.shade700,
+      selectedItemColor: AppColors.primary,
       unselectedItemColor: Colors.grey,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'المزيد'),

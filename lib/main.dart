@@ -1,4 +1,5 @@
-import 'package:alshaatir/screens/auth/sign_in_screen.dart';
+import 'package:alshaatir/core/app_colors.dart';
+import 'package:alshaatir/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -32,16 +33,16 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red.shade700),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
           useMaterial3: true,
           scaffoldBackgroundColor: const Color(0xfff5f5f5),
-          fontFamily: 'Roboto',
+          fontFamily: 'BalooBhaijaan2',
         ),
         builder: (context, child) => Directionality(
           textDirection: TextDirection.rtl,
           child: child ?? const SizedBox.shrink(),
         ),
-        home: const SignInScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

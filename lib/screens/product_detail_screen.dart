@@ -1,6 +1,9 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/screens/widgets/floating_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../models/category_model.dart';
 import '../providers/cart_provider.dart';
@@ -34,7 +37,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-                color: Colors.red.shade700,
+                color: AppColors.primary,
               ),
               padding: const EdgeInsets.all(
                   16),
@@ -124,7 +127,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               IconButton(
                                 onPressed: () => cart.increment(product.name),
                                 icon: const Icon(Icons.add_circle_outline),
-                                color: Colors.red.shade700,
+                                color: AppColors.primary,
                               ),
                             ],
                           ),
@@ -137,16 +140,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             for (int i = 0; i < quantity; i++) {
                               cart.addToCart(product);
                             }
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text('تم إضافة $quantity × ${product.name}'),
-                                duration: const Duration(seconds: 1),
+                            showTopSnackBar(
+                              Overlay.of(context),
+                              CustomSnackBar.success(
+                                message: 'تم إضافة $quantity × ${product.name}',
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade700,
+                            backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
@@ -166,11 +168,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                       Text(
-                        'ر.س ${price.toStringAsFixed(2)}',
+                        '${price.toStringAsFixed(2)} ج.م',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red.shade700,
+                          color: AppColors.primary,
                         ),
                       ),
                     ],

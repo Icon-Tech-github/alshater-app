@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:alshaatir/core/app_colors.dart';
 
 class DefaultHeader extends StatelessWidget {
   const DefaultHeader({super.key, required this.title, required this.height});
@@ -12,7 +13,7 @@ class DefaultHeader extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-        color: Colors.red.shade700,
+        color: AppColors.primary,
       ),
       padding: const EdgeInsets.all(
           16),

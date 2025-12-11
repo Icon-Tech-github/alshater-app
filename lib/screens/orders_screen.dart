@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
@@ -17,8 +18,8 @@ class OrdersScreen extends StatelessWidget {
           foregroundColor: Colors.black87,
           elevation: 0.4,
           bottom: const TabBar(
-            indicatorColor: Colors.red,
-            labelColor: Colors.red,
+            indicatorColor: AppColors.primary,
+            labelColor: AppColors.primary,
             unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(text: 'السابقة'),
@@ -80,9 +81,9 @@ class _OrdersList extends StatelessWidget {
                         fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   Text(
-                    order['total'] ?? 'ر.س 0.00',
+                    order['total'] ?? '0.00 ج.م',
                     style: TextStyle(
-                        color: Colors.red.shade700,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold),
                   ),
                 ],

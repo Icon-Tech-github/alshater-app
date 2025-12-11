@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:alshaatir/core/app_colors.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../models/category_model.dart';
 import '../../providers/cart_provider.dart';
@@ -68,9 +71,9 @@ class ProductCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'ر.س ${product.price.toStringAsFixed(2)}',
-              style: TextStyle(
-                color: Colors.red.shade700,
+              '${product.price.toStringAsFixed(2)} ج.م',
+              style: const TextStyle(
+                color: AppColors.primary,
                 fontWeight: FontWeight.w700,
                 fontSize: 15,
               ),
@@ -101,7 +104,7 @@ class ProductCard extends StatelessWidget {
                         IconButton(
                           onPressed: () => cart.increment(product.name),
                           icon: const Icon(Icons.add_circle_outline),
-                          color: Colors.red.shade700,
+                          color: AppColors.primary,
                         ),
                       ],
                     ),
@@ -120,11 +123,10 @@ class ProductCard extends StatelessWidget {
                     ),
                     onPressed: () {
                       context.read<CartProvider>().addToCart(product);
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('تم إضافة ${product.name} إلى السلة'),
-                          duration: const Duration(seconds: 1),
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.success(
+                          message: 'تم إضافة ${product.name} إلى السلة',
                         ),
                       );
                     },

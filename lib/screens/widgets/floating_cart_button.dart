@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:alshaatir/core/app_colors.dart';
 
 import '../../providers/cart_provider.dart';
 import '../cart_screen.dart';
@@ -16,7 +17,7 @@ class FloatingCartButton extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             FloatingActionButton(
-              backgroundColor: Colors.red.shade700,
+              backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
               onPressed: () {
                 Navigator.push(
@@ -34,12 +35,12 @@ class FloatingCartButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.red.shade700),
+                  border: Border.all(color: AppColors.primary),
                 ),
                 child: Text(
                   '$count',
                   style: TextStyle(
-                    color: Colors.red.shade700,
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),

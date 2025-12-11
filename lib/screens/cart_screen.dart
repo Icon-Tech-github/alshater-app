@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class CartScreen extends StatelessWidget {
                 bottomLeft: Radius.circular(32),
                 bottomRight: Radius.circular(32),
               ),
-              color: Colors.red.shade700,
+              color: AppColors.primary,
             ),
             padding: const EdgeInsets.all(16),
             child: const Column(
@@ -56,7 +57,7 @@ class CartScreen extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () => Navigator.pop(context),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade700,
+                            backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 22, vertical: 12),
@@ -114,9 +115,9 @@ class CartScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 6),
                                       Text(
-                                        'ر.س ${item.total.toStringAsFixed(2)}',
+                                        '${item.total.toStringAsFixed(2)} ج.م',
                                         style: TextStyle(
-                                          color: Colors.red.shade700,
+                                          color: AppColors.primary,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -141,7 +142,7 @@ class CartScreen extends StatelessWidget {
                                           .increment(item.product.name),
                                       icon:
                                       const Icon(Icons.add_circle_outline),
-                                      color: Colors.red.shade700,
+                                      color: AppColors.primary,
                                     ),
                                   ],
                                 ),
@@ -183,9 +184,9 @@ class CartScreen extends StatelessWidget {
                             children: [
                               const Text('المبلغ'),
                               Text(
-                                'ر.س ${cart.subtotal.toStringAsFixed(2)}',
+                                '${cart.subtotal.toStringAsFixed(2)} ج.م',
                                 style: TextStyle(
-                                  color: Colors.red.shade700,
+                                  color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -197,9 +198,9 @@ class CartScreen extends StatelessWidget {
                             children: [
                               const Text('رسوم التوصيل'),
                               Text(
-                                'ر.س ${cart.deliveryFee.toStringAsFixed(2)}',
+                                '${cart.deliveryFee.toStringAsFixed(2)} ج.م',
                                 style: TextStyle(
-                                  color: Colors.red.shade700,
+                                  color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -212,9 +213,9 @@ class CartScreen extends StatelessWidget {
                             children: [
                               const Text('الإجمالي'),
                               Text(
-                                'ر.س ${cart.total.toStringAsFixed(2)}',
+                                '${cart.total.toStringAsFixed(2)} ج.م',
                                 style: TextStyle(
-                                  color: Colors.red.shade700,
+                                  color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -233,7 +234,7 @@ class CartScreen extends StatelessWidget {
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red.shade700,
+                                backgroundColor: AppColors.primary,
                                 foregroundColor: Colors.white,
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 14),

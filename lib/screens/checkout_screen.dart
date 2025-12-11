@@ -1,5 +1,8 @@
+import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../providers/cart_provider.dart';
 import 'order_summary_screen.dart';
@@ -182,13 +185,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         context
                             .read<CartProvider>()
                             .applyPromo(_promoController.text.trim());
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('تم تطبيق كود الخصم (إن وجد)')),
+                        showTopSnackBar(
+                          Overlay.of(context),
+                          const CustomSnackBar.info(
+                            message: 'تم تطبيق كود الخصم (إن وجد)',
+                          ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red.shade700,
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 12),
@@ -219,22 +224,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       children: [
                         _SummaryRow(
                             label: 'المجموع الفرعي',
-                            value: 'ر.س ${cart.subtotal.toStringAsFixed(2)}'),
-                        _SummaryRow(label: 'الضريبة', value: 'ر.س 0.00'),
+                            value:
+                                '${cart.subtotal.toStringAsFixed(2)} ج.م'),
+                        _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
                         _SummaryRow(
                             label: 'رسوم التوصيل',
                             value: cart.deliveryFee == 0
                                 ? 'Free'
-                                : 'ر.س ${cart.deliveryFee.toStringAsFixed(2)}'),
+                                : '${cart.deliveryFee.toStringAsFixed(2)} ج.م'),
                         if (cart.discount > 0)
                           _SummaryRow(
                               label: 'الخصم',
                               value:
-                                  '- ر.س ${cart.discount.toStringAsFixed(2)}'),
+                                  '- ${cart.discount.toStringAsFixed(2)} ج.م'),
                         const Divider(),
                         _SummaryRow(
                           label: 'الإجمالي',
-                          value: 'ر.س ${cart.total.toStringAsFixed(2)}',
+                          value: '${cart.total.toStringAsFixed(2)} ج.م',
                           isBold: true,
                         ),
                       ],
@@ -248,7 +254,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 child: ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red.shade700,
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
@@ -291,7 +297,7 @@ class _SectionCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 18, color: Colors.red.shade700),
+              Icon(icon, size: 18, color: AppColors.primary),
               const SizedBox(width: 6),
               Text(
                 title,
@@ -329,7 +335,7 @@ class _RadioTile extends StatelessWidget {
       groupValue: groupValue,
       onChanged: onChanged,
       title: Text(title),
-      activeColor: Colors.red.shade700,
+      activeColor: AppColors.primary,
     );
   }
 }
@@ -362,7 +368,7 @@ class _SummaryRow extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: isBold ? Colors.red.shade700 : Colors.black87,
+              color: isBold ? AppColors.primary : Colors.black87,
               fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
             ),
           ),
