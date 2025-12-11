@@ -1,5 +1,5 @@
-import 'package:alshaatir/screens/auth/reset_password_screen.dart';
-import 'package:alshaatir/screens/auth/verify_code_screen.dart';
+import 'package:alshaatir/features/screens/auth/reset_password_screen.dart';
+import 'package:alshaatir/features/screens/auth/verify_code_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/default_header.dart';

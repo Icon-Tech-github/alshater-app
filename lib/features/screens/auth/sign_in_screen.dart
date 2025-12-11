@@ -1,7 +1,7 @@
-import 'package:alshaatir/screens/auth/forgot_password_screen.dart';
-import 'package:alshaatir/screens/auth/sign_up_screen.dart';
-import 'package:alshaatir/screens/home_page.dart';
-import 'package:alshaatir/screens/widgets/default_header.dart';
+import 'package:alshaatir/features/screens/auth/forgot_password_screen.dart';
+import 'package:alshaatir/features/screens/auth/sign_up_screen.dart';
+import 'package:alshaatir/features/screens/home_page.dart';
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {

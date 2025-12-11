@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:alshaatir/core/app_colors.dart';
-import 'package:alshaatir/screens/auth/sign_in_screen.dart';
+import 'package:alshaatir/features/screens/auth/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

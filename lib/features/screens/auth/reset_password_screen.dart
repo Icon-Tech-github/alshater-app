@@ -1,4 +1,4 @@
-import 'package:alshaatir/screens/auth/sign_in_screen.dart';
+import 'package:alshaatir/features/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/default_header.dart';
