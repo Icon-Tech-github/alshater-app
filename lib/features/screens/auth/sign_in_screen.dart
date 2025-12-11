@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
         child: Column(
           children: [
-            DefaultHeader(title: "Login",height: 120,),
+            DefaultHeader(title: "تسجيل دخول",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(

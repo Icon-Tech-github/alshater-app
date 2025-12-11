@@ -133,50 +133,55 @@ class OrderSummaryScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: const Offset(0, -2),
-                    )
-                  ],
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final orderId =
-                          'AL-${DateTime.now().millisecondsSinceEpoch % 100000}';
-                      final totalString = cart.total.toStringAsFixed(2);
-                      cart.addOrder(
-                        id: orderId,
-                        total: cart.total,
-                        status: 'قادم',
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => SuccessScreen(
-                            orderId: orderId,
-                            total: totalString,
+              SafeArea(
+                top: false,
+                left: false,
+                right: false,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 6,
+                        offset: const Offset(0, -2),
+                      )
+                    ],
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final orderId =
+                            'AL-${DateTime.now().millisecondsSinceEpoch % 100000}';
+                        final totalString = cart.total.toStringAsFixed(2);
+                        cart.addOrder(
+                          id: orderId,
+                          total: cart.total,
+                          status: 'قادم',
+                        );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SuccessScreen(
+                              orderId: orderId,
+                              total: totalString,
+                            ),
                           ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
                       ),
+                      child: const Text('تأكيد الطلب'),
                     ),
-                    child: const Text('تأكيد الطلب'),
                   ),
                 ),
               ),

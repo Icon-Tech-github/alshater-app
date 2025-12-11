@@ -88,7 +88,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const DefaultHeader(title: "Verify Code",height: 120,),
+            const DefaultHeader(title: "كود التفعيل",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(

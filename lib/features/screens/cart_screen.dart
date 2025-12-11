@@ -12,7 +12,12 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomNav(currentIndex: 2),
+      bottomNavigationBar: const SafeArea(
+        top: false,
+        left: false,
+        right: false,
+        child: BottomNav(currentIndex: 2),
+      ),
       body: Column(
         children: [
           // HEADER ثابت

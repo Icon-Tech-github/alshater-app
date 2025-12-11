@@ -77,7 +77,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const DefaultHeader(title: "Reset Password",height: 120,),
+            const DefaultHeader(title: "اعادة تعيين كلمة المرور",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(

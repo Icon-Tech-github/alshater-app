@@ -78,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
         child: Column(
           children: [
-            const DefaultHeader(title: "Sign Up",height: 120,),
+            const DefaultHeader(title: "انشاء حساب",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(

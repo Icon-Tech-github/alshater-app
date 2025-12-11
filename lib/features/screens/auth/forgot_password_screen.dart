@@ -80,7 +80,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const DefaultHeader(title: "Forget Password",height: 120,),
+            const DefaultHeader(title: "انشاء كلمة مرور جديدة",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(

@@ -83,182 +83,192 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const DefaultHeader(title: "بيانات التوصيل",height: 60,),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _SectionCard(
-                      title: 'رقم الهاتف',
-                      icon: Icons.phone_android,
-                      child:    TextFormField(
-                        controller: _phoneController,
-                        keyboardType: TextInputType.phone,
-                        decoration: _inputDecoration('رقم الجوال', Icons.phone_outlined),
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'يرجى إدخال رقم الجوال';
+      body: SafeArea(
+        top: false,
+        left: false,
+        right: false,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const DefaultHeader(title: "بيانات التوصيل",height: 60,),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _SectionCard(
+                        title: 'رقم الهاتف',
+                        icon: Icons.phone_android,
+                        child:    TextFormField(
+                          controller: _phoneController,
+                          keyboardType: TextInputType.phone,
+                          decoration: _inputDecoration('رقم الجوال', Icons.phone_outlined),
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'يرجى إدخال رقم الجوال';
+                            }
+                            if (value.trim().length < 8) {
+                              return 'رقم الجوال غير صحيح';
+                            }
+                            return null;
                           }
-                          if (value.trim().length < 8) {
-                            return 'رقم الجوال غير صحيح';
-                          }
-                          return null;
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _SectionCard(
+                        title: 'العنوان',
+                        icon: Icons.location_on_outlined,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: _addressController,
+                              textInputAction: TextInputAction.next,
+                              decoration: _inputDecoration('الموقع', Icons.location_on_outlined),
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'يرجى إدخال الموقع';
+                                }
+                                return null;
+                              },
+                            ),
+                            // const SizedBox(height: 10),
+                            // Row(
+                            //   children: [
+                            //     Expanded(
+                            //       child: TextFormField(
+                            //         controller: _latController,
+                            //         keyboardType: TextInputType.number,
+                            //         decoration: const InputDecoration(
+                            //           hintText: 'Latitude (اختياري)',
+                            //           prefixIcon: Icon(Icons.map_outlined),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     const SizedBox(width: 8),
+                            //     Expanded(
+                            //       child: TextFormField(
+                            //         controller: _lngController,
+                            //         keyboardType: TextInputType.number,
+                            //         decoration: const InputDecoration(
+                            //           hintText: 'Longitude (اختياري)',
+                            //           prefixIcon: Icon(Icons.map_outlined),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _SectionCard(
+                        title: 'كود الخصم',
+                        icon: Icons.local_offer_outlined,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _promoController,
+                                decoration: _inputDecoration('كود الخصم', Icons.airplane_ticket_rounded),
+
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<CartProvider>()
+                                    .applyPromo(_promoController.text.trim());
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('تم تطبيق كود الخصم (إن وجد)')),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 12),
+                              ),
+                              child: const Text('إضافة'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _SectionCard(
+                        title: 'الطلبات الخاصة',
+                        icon: Icons.note_outlined,
+                        child: TextFormField(
+                          controller: _notesController,
+                          decoration: _inputDecoration('ملاحظات (اختياري)', Icons.note_sharp),
+                          maxLines: 3,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Consumer<CartProvider>(
+                        builder: (context, cart, _) {
+                          return _SectionCard(
+                            title: 'ملخص الطلب',
+                            icon: Icons.receipt_long_outlined,
+                            child: Column(
+                              children: [
+                                _SummaryRow(
+                                  label: 'المجموع الفرعي',
+                                  value: '${cart.subtotal.toStringAsFixed(2)} ج.م',
+                                ),
+                                _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
+                                _SummaryRow(
+                                    label: 'رسوم التوصيل',
+                                    value: cart.deliveryFee == 0
+                                        ? 'Free'
+                                        : '${cart.deliveryFee.toStringAsFixed(2)}ج.م '),
+                                if (cart.discount > 0)
+                                  _SummaryRow(
+                                      label: 'الخصم',
+                                      value:
+                                      '${cart.discount.toStringAsFixed(2)}- ج.م'),
+                                const Divider(),
+                                _SummaryRow(
+                                  label: 'الإجمالي',
+                                  value: '${cart.total.toStringAsFixed(2)} ج.م',
+                                  isBold: true,
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    _SectionCard(
-                      title: 'العنوان',
-                      icon: Icons.location_on_outlined,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _addressController,
-                            textInputAction: TextInputAction.next,
-                            decoration: _inputDecoration('الموقع', Icons.location_on_outlined),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'يرجى إدخال الموقع';
-                              }
-                              return null;
-                            },
-                          ),
-                          // const SizedBox(height: 10),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: TextFormField(
-                          //         controller: _latController,
-                          //         keyboardType: TextInputType.number,
-                          //         decoration: const InputDecoration(
-                          //           hintText: 'Latitude (اختياري)',
-                          //           prefixIcon: Icon(Icons.map_outlined),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     const SizedBox(width: 8),
-                          //     Expanded(
-                          //       child: TextFormField(
-                          //         controller: _lngController,
-                          //         keyboardType: TextInputType.number,
-                          //         decoration: const InputDecoration(
-                          //           hintText: 'Longitude (اختياري)',
-                          //           prefixIcon: Icon(Icons.map_outlined),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    _SectionCard(
-                      title: 'كود الخصم',
-                      icon: Icons.local_offer_outlined,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _promoController,
-                              decoration: _inputDecoration('كود الخصم', Icons.airplane_ticket_rounded),
-
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<CartProvider>()
-                                  .applyPromo(_promoController.text.trim());
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('تم تطبيق كود الخصم (إن وجد)')),
-                              );
-                            },
+                      const SizedBox(height: 16),
+                      SafeArea(
+                        top: false,
+                        left: false,
+                        right: false,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: _submit,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                            child: const Text('إضافة'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    _SectionCard(
-                      title: 'الطلبات الخاصة',
-                      icon: Icons.note_outlined,
-                      child: TextFormField(
-                        controller: _notesController,
-                        decoration: _inputDecoration('ملاحظات (اختياري)', Icons.note_sharp),
-                        maxLines: 3,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Consumer<CartProvider>(
-                      builder: (context, cart, _) {
-                        return _SectionCard(
-                          title: 'ملخص الطلب',
-                          icon: Icons.receipt_long_outlined,
-                          child: Column(
-                            children: [
-                              _SummaryRow(
-                                label: 'المجموع الفرعي',
-                                value: '${cart.subtotal.toStringAsFixed(2)} ج.م',
-                              ),
-                              _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
-                              _SummaryRow(
-                                  label: 'رسوم التوصيل',
-                                  value: cart.deliveryFee == 0
-                                      ? 'Free'
-                                      : '${cart.deliveryFee.toStringAsFixed(2)}ج.م '),
-                              if (cart.discount > 0)
-                                _SummaryRow(
-                                    label: 'الخصم',
-                                    value:
-                                    '${cart.discount.toStringAsFixed(2)}- ج.م'),
-                              const Divider(),
-                              _SummaryRow(
-                                label: 'الإجمالي',
-                                value: '${cart.total.toStringAsFixed(2)} ج.م',
-                                isBold: true,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _submit,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            child: const Text('المتابعة للدفع'),
                           ),
                         ),
-                        child: const Text('المتابعة للدفع'),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
