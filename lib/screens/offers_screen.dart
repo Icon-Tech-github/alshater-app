@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
@@ -15,12 +14,12 @@ class OffersScreen extends StatelessWidget {
         'code': 'SWEET20',
       },
       {
-        'title': 'توصيل مجاني فوق 100 ج.م',
+        'title': 'توصيل مجاني فوق 100 ر.س',
         'subtitle': 'استخدم الكوبون: FREEDEL',
         'code': 'FREEDEL',
       },
       {
-        'title': 'خصم 10 ج.م على أول طلب',
+        'title': 'خصم 10 ر.س على أول طلب',
         'subtitle': 'استخدم الكوبون: WELCOME',
         'code': 'WELCOME',
       },
@@ -63,8 +62,8 @@ class OffersScreen extends StatelessWidget {
                   children: [
                     Chip(
                       label: Text(offer['code']!),
-                      backgroundColor: AppColors.background,
-                      labelStyle: TextStyle(color: AppColors.primary),
+                      backgroundColor: Colors.red.shade50,
+                      labelStyle: TextStyle(color: Colors.red.shade700),
                     ),
                     const Spacer(),
                     TextButton(

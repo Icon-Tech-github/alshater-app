@@ -1,6 +1,6 @@
-import 'package:alshaatir/screens/widgets/header.dart';
-import 'package:alshaatir/screens/widgets/promo_banner.dart';
-import 'package:alshaatir/screens/widgets/sub_category_tile.dart';
+import 'package:alshaatir/features/screens/widgets/header.dart';
+import 'package:alshaatir/features/screens/widgets/promo_banner.dart';
+import 'package:alshaatir/features/screens/widgets/sub_category_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';

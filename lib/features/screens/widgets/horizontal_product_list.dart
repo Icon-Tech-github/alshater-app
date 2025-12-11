@@ -1,5 +1,4 @@
-
-import 'package:alshaatir/screens/widgets/product_card.dart';
+import 'package:alshaatir/features/screens/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/category_model.dart';

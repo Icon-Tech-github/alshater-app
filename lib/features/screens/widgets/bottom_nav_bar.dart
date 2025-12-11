@@ -1,3 +1,4 @@
+import 'package:alshaatir/features/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:alshaatir/core/app_colors.dart';
 
@@ -50,6 +51,12 @@ class BottomNav extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const OffersScreen()),
+          );
+        }
+        else if (index == 4) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const HomePage()),
           );
         }
         // index 4 (home) or 0 (more) left as-is.

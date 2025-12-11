@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/screens/widgets/header.dart';
 import 'package:alshaatir/screens/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -81,14 +80,14 @@ class _BrandsProductsScreenState extends State<BrandsProductsScreen> {
                     selected: isSelected,
                     onSelected: (_) =>
                         setState(() => selectedBrand = brand.name),
-                    selectedColor: AppColors.background,
+                    selectedColor: Colors.red.shade100,
                     side: BorderSide(
                       color: isSelected
-                          ? AppColors.primary
+                          ? Colors.red.shade700
                           : Colors.grey.shade300,
                     ),
                     labelStyle: TextStyle(
-                      color: isSelected ? AppColors.primary : Colors.black87,
+                      color: isSelected ? Colors.red.shade700 : Colors.black87,
                       fontWeight: FontWeight.w600,
                     ),
                   );

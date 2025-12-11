@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -92,11 +91,11 @@ class OrderSummaryScreen extends StatelessWidget {
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold)),
                                 subtitle: Text(
-                                    '${item.quantity} الكمية · ${item.product.price.toStringAsFixed(2)} ج.م'),
+                                    '${item.quantity} الكمية · ر.س ${item.product.price.toStringAsFixed(2)}'),
                                 trailing: Text(
-                                  '${item.total.toStringAsFixed(2)} ج.م',
+                                  'ر.س ${item.total.toStringAsFixed(2)}',
                                   style: TextStyle(
-                                      color: AppColors.primary,
+                                      color: Colors.red.shade700,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -110,27 +109,27 @@ class OrderSummaryScreen extends StatelessWidget {
                       icon: Icons.receipt_long_outlined,
                       child: Column(
                         children: [
-                        _SummaryRow(
-                            label: 'المجموع الفرعي',
-                            value:
-                                '${cart.subtotal.toStringAsFixed(2)} ج.م'),
-                        _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
+                          _SummaryRow(
+                              label: 'المجموع الفرعي',
+                              value:
+                                  'ر.س ${cart.subtotal.toStringAsFixed(2)}'),
+                          _SummaryRow(label: 'الضريبة', value: 'ر.س 0.00'),
                           _SummaryRow(
                               label: 'رسوم التوصيل',
                               value: cart.deliveryFee == 0
                                   ? 'Free'
-                                : '${cart.deliveryFee.toStringAsFixed(2)} ج.م'),
+                                  : 'ر.س ${cart.deliveryFee.toStringAsFixed(2)}'),
                           if (cart.discount > 0)
                             _SummaryRow(
                               label: 'الخصم',
                               value:
-                                  '- ${cart.discount.toStringAsFixed(2)} ج.م',
+                                  '- ر.س ${cart.discount.toStringAsFixed(2)}',
                               isBold: true,
                             ),
                           const Divider(),
                           _SummaryRow(
                             label: 'الإجمالي',
-                          value: '${cart.total.toStringAsFixed(2)} ج.م',
+                            value: 'ر.س ${cart.total.toStringAsFixed(2)}',
                             isBold: true,
                           ),
                         ],
@@ -170,7 +169,7 @@ class OrderSummaryScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: Colors.red.shade700,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
@@ -214,7 +213,7 @@ class _CardBlock extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 18, color: AppColors.primary),
+              Icon(icon, size: 18, color: Colors.red.shade700),
               const SizedBox(width: 6),
               Text(
                 title,
@@ -259,7 +258,7 @@ class _SummaryRow extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: isBold ? AppColors.primary : Colors.black87,
+              color: isBold ? Colors.red.shade700 : Colors.black87,
               fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
             ),
           ),
