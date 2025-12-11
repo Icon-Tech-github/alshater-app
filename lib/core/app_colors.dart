@@ -12,7 +12,7 @@ class AppColors {
   /// Deep Blue - Primary Color
   static const Color primary = Color(0xFF145CDB);
 
-  static const Color primary2 = Color(0xFF145CDB); // Duplicate of primary color
+  static const Color primary2 = Color(0xFF145CDB); //  Duplicate of primary color
   /// الأزرق المتوسط - اللون الثانوي
   /// Medium Blue - Secondary Color
   static const Color secondary = Color(0xFF848AFF);
