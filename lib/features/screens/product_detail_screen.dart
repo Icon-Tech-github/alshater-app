@@ -17,6 +17,15 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int quantity = 1;
+  late final List<String> _sizeOptions;
+  late String _selectedSize;
+
+  @override
+  void initState() {
+    super.initState();
+    _sizeOptions = const ['قطعة', 'كرتونة'];
+    _selectedSize = _sizeOptions.first;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final cart = context.watch<CartProvider>();
     final cartQty = cart.quantityOf(product.name);
     final displayQty = cartQty > 0 ? cartQty : quantity;
-    final price = product.price * displayQty;
+    final unitPrice =
+    _selectedSize == 'كرتونة' ? _cartonPrice(product.price) : product.price;
+    final price = unitPrice * displayQty;
 
     return Scaffold(
       floatingActionButton: const FloatingCartButton(),
@@ -35,7 +46,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-                color: AppColors.primary,
+                color: Colors.red.shade700,
               ),
               padding: const EdgeInsets.all(
                   16),
@@ -66,7 +77,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Text(
                     product.name,
                     style:
-                        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 6),
                   Text(
@@ -78,7 +89,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       Container(
                         padding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
                           color: Colors.green.shade50,
                           borderRadius: BorderRadius.circular(10),
@@ -93,10 +104,47 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        product.size,
+                        _selectedSize,
                         style: const TextStyle(color: Colors.black54),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'اختر الحجم',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 10),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _sizeOptions
+                          .map(
+                            (size) {
+                          final isCarton = _isCarton(size);
+                          final cartonPrice = _cartonPrice(product.price);
+                          final optionPrice =
+                          isCarton ? cartonPrice : product.price;
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: _SizeCard(
+                              label: size,
+                              price: optionPrice,
+                              unitPrice: product.price,
+                              cartonPrice: cartonPrice,
+                              isCarton: isCarton,
+                              selected: _selectedSize == size,
+                              onTap: () {
+                                setState(() {
+                                  _selectedSize = size;
+                                });
+                              },
+                            ),
+                          );
+                        },
+                      )
+                          .toList(),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Consumer<CartProvider>(
@@ -120,12 +168,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               Text(
                                 '$qty',
                                 style:
-                                    const TextStyle(fontWeight: FontWeight.bold),
+                                const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               IconButton(
                                 onPressed: () => cart.increment(product.name),
                                 icon: const Icon(Icons.add_circle_outline),
-                                color: AppColors.primary,
+                                color: Colors.red.shade700,
                               ),
                             ],
                           ),
@@ -136,18 +184,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         child: ElevatedButton(
                           onPressed: () {
                             for (int i = 0; i < quantity; i++) {
-                              cart.addToCart(product);
+                              cart.addToCart(
+                                product,
+                                price: unitPrice,
+                                sizeLabel: _selectedSize,
+                              );
                             }
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content:
-                                    Text('تم إضافة $quantity × ${product.name}'),
+                                Text('تم إضافة $quantity × ${product.name}'),
                                 duration: const Duration(seconds: 1),
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
+                            backgroundColor: Colors.red.shade700,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
@@ -167,11 +219,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                       Text(
-                        'ر.س ${price.toStringAsFixed(2)}',
+                        '${price.toStringAsFixed(2)} ج.م ',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
+                          color: Colors.red.shade700,
                         ),
                       ),
                     ],
@@ -180,7 +232,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const SizedBox(height: 12),
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -196,6 +248,163 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  bool _isCarton(String size) {
+    final normalized = size.toLowerCase();
+    return normalized.contains('كرت') || normalized.contains('carton');
+  }
+
+  double _cartonPrice(double basePrice) => basePrice * 12; // default 12 قطع
+}
+
+class _SizeCard extends StatelessWidget {
+  final String label;
+  final double price;
+  final double unitPrice;
+  final double cartonPrice;
+  final bool isCarton;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _SizeCard({
+    required this.label,
+    required this.price,
+    required this.unitPrice,
+    required this.cartonPrice,
+    required this.isCarton,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 190,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.white : Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selected ? AppColors.primary : Colors.grey.shade300,
+            width: selected ? 1.6 : 1,
+          ),
+          boxShadow: selected
+              ? [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.08),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ]
+              : null,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color:
+                          selected ? AppColors.primary : Colors.transparent,
+                          border: Border.all(
+                            color: selected
+                                ? AppColors.primary
+                                : Colors.grey.shade400,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.check,
+                          size: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              label,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              'أقل كمية $label',
+                              style: TextStyle(
+                                color: Colors.grey.shade600,
+                                fontSize: 12.5,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    'جنيه ${price.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      color: Colors.grey.shade800,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13.5,
+                    ),
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (isCarton)
+              Text(
+                'سعر القطعة: جنيه ${unitPrice.toStringAsFixed(2)}',
+                style: TextStyle(
+                  color: Colors.grey.shade700,
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            else
+              Text(
+                'سعر الكرتونة: جنيه ${cartonPrice.toStringAsFixed(2)}',
+                style: TextStyle(
+                  color: Colors.grey.shade700,
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            const SizedBox(height: 6),
+            const Text(
+              'الاسعار تشمل ضريبة القيمة المضافة',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],

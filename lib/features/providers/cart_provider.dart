@@ -4,15 +4,39 @@ import '../models/category_model.dart';
 
 class CartItem {
   final Product product;
+  double price;
+  String sizeLabel;
   int quantity;
 
-  CartItem({required this.product, this.quantity = 1});
+  CartItem({
+    required this.product,
+    required this.price,
+    required this.sizeLabel,
+    this.quantity = 1,
+  });
 
-  double get total => product.price * quantity;
+  double get total => price * quantity;
+}
+
+class OrderModel {
+  final String id;
+  final double total;
+  final DateTime date;
+  final String status; // 'قادم' أو 'سابق'
+  final List<CartItem> items;
+
+  OrderModel({
+    required this.id,
+    required this.total,
+    required this.date,
+    required this.status,
+    required this.items,
+  });
 }
 
 class CartProvider extends ChangeNotifier {
   final Map<String, CartItem> _items = {};
+  final List<OrderModel> _orders = [];
   String _phone = '';
   String _address = '';
   String _paymentMethod = 'الدفع عند الاستلام';
@@ -45,11 +69,28 @@ class CartProvider extends ChangeNotifier {
 
   int quantityOf(String productName) => _items[productName]?.quantity ?? 0;
 
-  void addToCart(Product product) {
+  List<OrderModel> get upcomingOrders =>
+      _orders.where((o) => o.status == 'قادم').toList();
+
+  List<OrderModel> get previousOrders =>
+      _orders.where((o) => o.status == 'سابق').toList();
+
+  void addToCart(
+      Product product, {
+        required double price,
+        required String sizeLabel,
+      }) {
     if (_items.containsKey(product.name)) {
-      _items[product.name]!.quantity += 1;
+      final item = _items[product.name]!;
+      item.price = price;
+      item.sizeLabel = sizeLabel;
+      item.quantity += 1;
     } else {
-      _items[product.name] = CartItem(product: product);
+      _items[product.name] = CartItem(
+        product: product,
+        price: price,
+        sizeLabel: sizeLabel,
+      );
     }
     notifyListeners();
   }
@@ -122,6 +163,51 @@ class CartProvider extends ChangeNotifier {
     _notes = '';
     _promoCode = '';
     _discount = 0;
+  }
+
+  void addOrder({
+    required String id,
+    required double total,
+    required String status,
+  }) {
+    // Create a snapshot of cart items to store with the order
+    final snapshotItems = _items.values
+        .map(
+          (item) => CartItem(
+        product: item.product,
+        price: item.price,
+        sizeLabel: item.sizeLabel,
+        quantity: item.quantity,
+      ),
+    )
+        .toList();
+
+    _orders.insert(
+      0,
+      OrderModel(
+        id: id,
+        total: total,
+        date: DateTime.now(),
+        status: status,
+        items: snapshotItems,
+      ),
+    );
+    notifyListeners();
+  }
+
+  void markOrderAsPrevious(String id) {
+    final index = _orders.indexWhere((o) => o.id == id);
+    if (index != -1) {
+      final order = _orders[index];
+      _orders[index] = OrderModel(
+        id: order.id,
+        total: order.total,
+        date: order.date,
+        status: 'سابق',
+        items: order.items,
+      );
+      notifyListeners();
+    }
   }
 
   void clearCart() {

@@ -122,7 +122,11 @@ class ProductCard extends StatelessWidget {
                       minimumSize: const Size.fromHeight(36),
                     ),
                     onPressed: () {
-                      context.read<CartProvider>().addToCart(product);
+                      context.read<CartProvider>().addToCart(
+                        product,
+                        price: product.price,
+                        sizeLabel: 'قطعة',
+                      );
                       showTopSnackBar(
                         Overlay.of(context),
                         CustomSnackBar.success(

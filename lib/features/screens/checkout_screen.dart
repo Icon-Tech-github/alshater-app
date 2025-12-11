@@ -1,4 +1,3 @@
-import 'package:alshaatir/core/app_colors.dart';
 import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -188,7 +187,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: Colors.red.shade700,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 12),
@@ -205,7 +204,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: TextFormField(
                         controller: _notesController,
                         decoration: _inputDecoration('ملاحظات (اختياري)', Icons.note_sharp),
-                       maxLines: 3,
+                        maxLines: 3,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -217,23 +216,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           child: Column(
                             children: [
                               _SummaryRow(
-                                  label: 'المجموع الفرعي',
-                                  value: 'ر.س ${cart.subtotal.toStringAsFixed(2)}'),
-                              _SummaryRow(label: 'الضريبة', value: 'ر.س 0.00'),
+                                label: 'المجموع الفرعي',
+                                value: '${cart.subtotal.toStringAsFixed(2)} ج.م',
+                              ),
+                              _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
                               _SummaryRow(
                                   label: 'رسوم التوصيل',
                                   value: cart.deliveryFee == 0
                                       ? 'Free'
-                                      : 'ر.س ${cart.deliveryFee.toStringAsFixed(2)}'),
+                                      : '${cart.deliveryFee.toStringAsFixed(2)}ج.م '),
                               if (cart.discount > 0)
                                 _SummaryRow(
                                     label: 'الخصم',
                                     value:
-                                        '- ر.س ${cart.discount.toStringAsFixed(2)}'),
+                                    '${cart.discount.toStringAsFixed(2)}- ج.م'),
                               const Divider(),
                               _SummaryRow(
                                 label: 'الإجمالي',
-                                value: 'ر.س ${cart.total.toStringAsFixed(2)}',
+                                value: '${cart.total.toStringAsFixed(2)} ج.م',
                                 isBold: true,
                               ),
                             ],
@@ -247,7 +247,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
+                          backgroundColor: Colors.red.shade700,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
@@ -293,12 +293,12 @@ class _SectionCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 18, color: AppColors.primary),
+              Icon(icon, size: 18, color: Colors.red.shade700),
               const SizedBox(width: 6),
               Text(
                 title,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ],
           ),
@@ -331,7 +331,7 @@ class _RadioTile extends StatelessWidget {
       groupValue: groupValue,
       onChanged: onChanged,
       title: Text(title),
-      activeColor: AppColors.primary,
+      activeColor: Colors.red.shade700,
     );
   }
 }
@@ -364,7 +364,7 @@ class _SummaryRow extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: isBold ? AppColors.primary : Colors.black87,
+              color: isBold ? Colors.red.shade700 : Colors.black87,
               fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
             ),
           ),

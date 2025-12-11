@@ -92,14 +92,13 @@ class OrderSummaryScreen extends StatelessWidget {
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold)),
                                 subtitle: Text(
-                                    '${item.quantity} الكمية · ر.س ${item.product.price.toStringAsFixed(2)}'),
+                                    'الكمية : ${item.quantity} * ${item.product.price.toStringAsFixed(2)} ج.م'),
                                 trailing: Text(
-                                  'ر.س ${item.total.toStringAsFixed(2)}',
+                                  '${item.total.toStringAsFixed(2)}ج.م ',
                                   style: TextStyle(
-                                      color: AppColors.primary,
+                                      color: Colors.red.shade700,
                                       fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                                ))
                             )
                             .toList(),
                       ),
@@ -113,24 +112,24 @@ class OrderSummaryScreen extends StatelessWidget {
                           _SummaryRow(
                               label: 'المجموع الفرعي',
                               value:
-                                  'ر.س ${cart.subtotal.toStringAsFixed(2)}'),
-                          _SummaryRow(label: 'الضريبة', value: 'ر.س 0.00'),
+                              '${cart.subtotal.toStringAsFixed(2)}ج.م '),
+                          _SummaryRow(label: 'الضريبة', value: '0.00 ج.م'),
                           _SummaryRow(
                               label: 'رسوم التوصيل',
                               value: cart.deliveryFee == 0
                                   ? 'Free'
-                                  : 'ر.س ${cart.deliveryFee.toStringAsFixed(2)}'),
+                                  : '${cart.deliveryFee.toStringAsFixed(2)}ج.م '),
                           if (cart.discount > 0)
                             _SummaryRow(
                               label: 'الخصم',
                               value:
-                                  '- ر.س ${cart.discount.toStringAsFixed(2)}',
+                              '${cart.discount.toStringAsFixed(2)}- ج.م',
                               isBold: true,
                             ),
                           const Divider(),
                           _SummaryRow(
                             label: 'الإجمالي',
-                            value: 'ر.س ${cart.total.toStringAsFixed(2)}',
+                            value: '${cart.total.toStringAsFixed(2)}ج.م ',
                             isBold: true,
                           ),
                         ],
@@ -157,8 +156,13 @@ class OrderSummaryScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       final orderId =
-                          'JY-${DateTime.now().millisecondsSinceEpoch % 10000}';
+                          'AL-${DateTime.now().millisecondsSinceEpoch % 100000}';
                       final totalString = cart.total.toStringAsFixed(2);
+                      cart.addOrder(
+                        id: orderId,
+                        total: cart.total,
+                        status: 'قادم',
+                      );
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

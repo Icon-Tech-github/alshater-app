@@ -1,7 +1,7 @@
 import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'widgets/bottom_nav_bar.dart';
 import '../providers/cart_provider.dart';
 import 'checkout_screen.dart';
 
@@ -11,6 +11,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const BottomNav(currentIndex: 2),
       body: Column(
         children: [
           // HEADER ثابت
@@ -77,82 +78,87 @@ class CartScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         itemBuilder: (context, index) {
                           final item = cart.items[index];
-                          return Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.grey.shade200),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    item.product.imageUrl,
-                                    height: 64,
-                                    width: 64,
-                                    fit: BoxFit.contain,
+                          return Dismissible(
+                            key: ValueKey(item.product.name),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (_) => cart.remove(item.product.name),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Colors.grey.shade200),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      item.product.imageUrl,
+                                      height: 64,
+                                      width: 64,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.product.name,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          item.product.size,
+                                          style: const TextStyle(
+                                              color: Colors.grey, fontSize: 12),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Text(
+                                          '${item.total.toStringAsFixed(2)} ج.م',
+                                          style: TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
                                     children: [
+                                      IconButton(
+                                        onPressed: () => cart
+                                            .decrement(item.product.name),
+                                        icon: const Icon(
+                                            Icons.remove_circle_outline),
+                                      ),
                                       Text(
-                                        item.product.name,
+                                        '${item.quantity}',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        item.product.size,
-                                        style: const TextStyle(
-                                            color: Colors.grey, fontSize: 12),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Text(
-                                        '${item.total.toStringAsFixed(2)} ج.م',
-                                        style: TextStyle(
-                                          color: AppColors.primary,
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                      IconButton(
+                                        onPressed: () => cart
+                                            .increment(item.product.name),
+                                        icon:
+                                        const Icon(Icons.add_circle_outline),
+                                        color: AppColors.primary,
                                       ),
                                     ],
                                   ),
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () => cart
-                                          .decrement(item.product.name),
-                                      icon: const Icon(
-                                          Icons.remove_circle_outline),
-                                    ),
-                                    Text(
-                                      '${item.quantity}',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    IconButton(
-                                      onPressed: () => cart
-                                          .increment(item.product.name),
-                                      icon:
-                                      const Icon(Icons.add_circle_outline),
-                                      color: AppColors.primary,
-                                    ),
-                                  ],
-                                ),
-                                IconButton(
-                                  onPressed: () =>
-                                      cart.remove(item.product.name),
-                                  icon: const Icon(Icons.delete_outline),
-                                  color: Colors.grey.shade600,
-                                ),
-                              ],
+                                  // IconButton(
+                                  //   onPressed: () =>
+                                  //       cart.remove(item.product.name),
+                                  //   icon: const Icon(Icons.delete_outline),
+                                  //   color: Colors.grey.shade600,
+                                  // ),
+                                ],
+                              ),
                             ),
                           );
                         },

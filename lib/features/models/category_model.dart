@@ -27,6 +27,7 @@ class Product {
   final String brand;
   final String brandImage;
   final String size;
+  final List<String> sizes;
   final double price;
   final String imageUrl;
 
@@ -35,6 +36,7 @@ class Product {
     required this.brand,
     required this.brandImage,
     required this.size,
+    this.sizes = const [],
     required this.price,
     required this.imageUrl,
   });

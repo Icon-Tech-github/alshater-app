@@ -1,6 +1,8 @@
 import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -27,11 +29,21 @@ class OrdersScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
-          children: [
-            _OrdersList(emptyMessage: 'لا توجد طلبات سابقة حالياً'),
-            _OrdersList(emptyMessage: 'لا توجد طلبات قادمة حالياً'),
-          ],
+        body: Consumer<CartProvider>(
+          builder: (context, cart, _) {
+            return TabBarView(
+              children: [
+                _OrdersList(
+                  orders: cart.previousOrders,
+                  emptyMessage: 'لا توجد طلبات سابقة حالياً',
+                ),
+                _OrdersList(
+                  orders: cart.upcomingOrders,
+                  emptyMessage: 'لا توجد طلبات قادمة حالياً',
+                ),
+              ],
+            );
+          },
         ),
         bottomNavigationBar: const BottomNav(currentIndex: 1),
       ),
@@ -40,15 +52,16 @@ class OrdersScreen extends StatelessWidget {
 }
 
 class _OrdersList extends StatelessWidget {
+  final List<OrderModel> orders;
   final String emptyMessage;
 
-  const _OrdersList({required this.emptyMessage});
+  const _OrdersList({
+    required this.orders,
+    required this.emptyMessage,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Placeholder list. Integrate with real order data when available.
-    final orders = <Map<String, String>>[];
-
     if (orders.isEmpty) {
       return Center(
         child: Text(
@@ -76,12 +89,12 @@ class _OrdersList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    order['id'] ?? 'طلب #${index + 1}',
+                    'طلب #${order.id}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   Text(
-                    order['total'] ?? '0.00 ج.م',
+                    '${order.total.toStringAsFixed(2)} ج.م',
                     style: TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold),
@@ -89,8 +102,12 @@ class _OrdersList extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 6),
-              Text(order['status'] ?? 'قيد المعالجة',
-                  style: const TextStyle(color: Colors.grey)),
+              Text(order.status, style: const TextStyle(color: Colors.grey)),
+              const SizedBox(height: 6),
+              Text(
+                'التاريخ: ${order.date.toLocal().toString().split('.').first}',
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              ),
             ],
           ),
         );

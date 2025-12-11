@@ -1,5 +1,5 @@
-import 'package:alshaatir/core/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart_provider.dart';
@@ -32,11 +32,11 @@ class SuccessScreen extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-              color: AppColors.primary,
+              color: Colors.red.shade700,
             ),
             padding: const EdgeInsets.all(
                 16),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 40,),
@@ -45,14 +45,73 @@ class SuccessScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
-          Icon(Icons.check_circle,
-              size: 250, color: Colors.green.shade600),
+          Lottie.asset("assets/json/Success animation.json"),
+          // Icon(Icons.check_circle,
+          //     size: 250, color: Colors.green.shade600),
           const SizedBox(height: 28),
 
           const Text(
             'تم ارسال طلبك بنجاح وسوف يتم التواصل معك',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 28),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade200),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'رقم الطلب',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Text(
+                        '#$orderId',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'الإجمالي',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '$total ج.م',
+                        style: TextStyle(
+                          color: Colors.red.shade700,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
           const Spacer(),
           Padding(
@@ -65,7 +124,7 @@ class SuccessScreen extends StatelessWidget {
                   Navigator.popUntil(context, (route) => route.isFirst);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: Colors.red.shade700,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(

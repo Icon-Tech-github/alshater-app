@@ -69,16 +69,14 @@ class Header extends StatelessWidget {
                   color: AppColors.light,
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: userImageUrl != null
-                      ? Image.network(
-                          userImageUrl!,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return _defaultAvatar();
-                          },
-                        )
-                      : _defaultAvatar(),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      "assets/imeges/logo-alshater.png",
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return _defaultAvatar();
+                      },
+                    )
                 ),
               ),
             ],
