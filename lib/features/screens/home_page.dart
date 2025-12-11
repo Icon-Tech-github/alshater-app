@@ -1,11 +1,11 @@
-import 'package:alshaatir/screens/sub_category_screen.dart';
-import 'package:alshaatir/screens/widgets/bottom_nav_bar.dart';
-import 'package:alshaatir/screens/widgets/brand_strip.dart';
-import 'package:alshaatir/screens/widgets/category_grid.dart';
-import 'package:alshaatir/screens/widgets/header.dart';
-import 'package:alshaatir/screens/widgets/horizontal_product_list.dart';
-import 'package:alshaatir/screens/widgets/promo_banner.dart';
-import 'package:alshaatir/screens/widgets/section_header.dart';
+import 'package:alshaatir/features/screens/sub_category_screen.dart';
+import 'package:alshaatir/features/screens/widgets/bottom_nav_bar.dart';
+import 'package:alshaatir/features/screens/widgets/brand_strip.dart';
+import 'package:alshaatir/features/screens/widgets/category_grid.dart';
+import 'package:alshaatir/features/screens/widgets/header.dart';
+import 'package:alshaatir/features/screens/widgets/horizontal_product_list.dart';
+import 'package:alshaatir/features/screens/widgets/promo_banner.dart';
+import 'package:alshaatir/features/screens/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';

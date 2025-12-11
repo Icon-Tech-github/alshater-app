@@ -1,4 +1,4 @@
-import 'package:alshaatir/screens/widgets/floating_cart_button.dart';
+import 'package:alshaatir/features/screens/widgets/floating_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

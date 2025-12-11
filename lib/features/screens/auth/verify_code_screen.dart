@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/default_header.dart';
@@ -129,7 +130,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: firstColor,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),

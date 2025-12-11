@@ -1,25 +1,31 @@
-import 'package:alshaatir/screens/auth/forgot_password_screen.dart';
-import 'package:alshaatir/screens/auth/sign_up_screen.dart';
-import 'package:alshaatir/screens/home_page.dart';
-import 'package:alshaatir/screens/widgets/default_header.dart';
+import 'package:alshaatir/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+import '../home_page.dart';
+import '../widgets/default_header.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _shopNameController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _locationController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
   void dispose() {
+    _nameController.dispose();
+    _shopNameController.dispose();
     _phoneController.dispose();
+    _locationController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -72,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
         child: Column(
           children: [
-            DefaultHeader(title: "Login",height: 120,),
+            const DefaultHeader(title: "Sign Up",height: 120,),
             const SizedBox(height: 16),
             _authCard(
               Form(
@@ -81,17 +87,42 @@ class _SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'تسجيل الدخول',
+                      'إنشاء حساب',
                       style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'أدخل بياناتك للوصول إلى حسابك.',
+                      'املأ الحقول بالأسفل للانضمام.',
                       style: textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
                     ),
                     const SizedBox(height: 24),
                     TextFormField(
+                      controller: _nameController,
+                      textInputAction: TextInputAction.next,
+                      decoration: _inputDecoration('الاسم الكامل', Icons.person_outline),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'يرجى إدخال الاسم';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _shopNameController,
+                      textInputAction: TextInputAction.next,
+                      decoration: _inputDecoration('اسم المتجر', Icons.store_mall_directory_outlined),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'يرجى إدخال اسم المتجر';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
                       controller: _phoneController,
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.phone,
                       decoration: _inputDecoration('رقم الجوال', Icons.phone_outlined),
                       validator: (value) {
@@ -100,6 +131,18 @@ class _SignInScreenState extends State<SignInScreen> {
                         }
                         if (value.trim().length < 8) {
                           return 'رقم الجوال غير صحيح';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _locationController,
+                      textInputAction: TextInputAction.next,
+                      decoration: _inputDecoration('الموقع', Icons.location_on_outlined),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'يرجى إدخال الموقع';
                         }
                         return null;
                       },
@@ -128,51 +171,24 @@ class _SignInScreenState extends State<SignInScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => const ForgotPasswordScreen()),
-                          );
-                        },
-                        child: const Text('نسيت كلمة المرور؟'),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 24),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: firstColor,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text('تسجيل الدخول',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
+                        child: const Text('تسجيل',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('ليس لديك حساب؟'),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const SignUpScreen()),
-                    );
-                  },
-                  child: const Text('إنشاء حساب جديد'),
-                ),
-              ],
             ),
           ],
         ),

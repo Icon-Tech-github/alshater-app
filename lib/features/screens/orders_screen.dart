@@ -1,3 +1,4 @@
+import 'package:alshaatir/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
@@ -17,8 +18,8 @@ class OrdersScreen extends StatelessWidget {
           foregroundColor: Colors.black87,
           elevation: 0.4,
           bottom: const TabBar(
-            indicatorColor: Colors.red,
-            labelColor: Colors.red,
+            indicatorColor: firstColor,
+            labelColor: firstColor,
             unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(text: 'السابقة'),

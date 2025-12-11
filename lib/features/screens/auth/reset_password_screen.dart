@@ -1,4 +1,5 @@
-import 'package:alshaatir/screens/auth/sign_in_screen.dart';
+import 'package:alshaatir/core/constants/colors.dart';
+import 'package:alshaatir/features/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/default_header.dart';
@@ -137,7 +138,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       child: ElevatedButton(
                         onPressed: _reset,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: firstColor,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),

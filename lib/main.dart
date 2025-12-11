@@ -1,9 +1,9 @@
-import 'package:alshaatir/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/cart_provider.dart';
+import 'features/providers/cart_provider.dart';
+import 'features/screens/auth/sign_in_screen.dart';
 
 void main() {
   runApp(const MyApp());

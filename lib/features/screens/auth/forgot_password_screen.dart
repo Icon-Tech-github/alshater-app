@@ -1,7 +1,7 @@
-import 'package:alshaatir/screens/auth/reset_password_screen.dart';
-import 'package:alshaatir/screens/auth/verify_code_screen.dart';
+import 'package:alshaatir/core/constants/colors.dart';
+import 'package:alshaatir/features/screens/auth/reset_password_screen.dart';
+import 'package:alshaatir/features/screens/auth/verify_code_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/default_header.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -113,7 +113,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       child: ElevatedButton(
                         onPressed: _goToReset,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: firstColor,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
