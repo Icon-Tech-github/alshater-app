@@ -1,4 +1,5 @@
 import 'package:alshaatir/core/app_colors.dart';
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -25,22 +26,7 @@ class MoreScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-            color: AppColors.primary,
-          ),
-          padding: const EdgeInsets.all(
-              16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 40,),
-              Text("Welcome User",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white))
-            ],
-          ),
-        ),
+            const DefaultHeader(title: "القائمة",height: 60,),
             const SizedBox(height: 18),
             Container(
               color: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:alshaatir/core/app_colors.dart';
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'widgets/bottom_nav_bar.dart';
@@ -15,31 +16,7 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: [
           // HEADER ثابت
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(32),
-                bottomRight: Radius.circular(32),
-              ),
-              color: AppColors.primary,
-            ),
-            padding: const EdgeInsets.all(16),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 40),
-                Text(
-                  'السلة',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const DefaultHeader(title: 'السلة',height: 60,),
 
           Expanded(
             child: Consumer<CartProvider>(

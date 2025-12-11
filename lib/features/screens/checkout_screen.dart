@@ -1,6 +1,7 @@
 import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';import '../../core/app_colors.dart';
+
 
 import '../providers/cart_provider.dart';
 import 'order_summary_screen.dart';
@@ -20,8 +21,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   late final TextEditingController _lngController;
   late final TextEditingController _notesController;
   late final TextEditingController _promoController;
-  String _paymentMethod = 'الدفع عند الاستلام';
-  String _deliveryMethod = 'استلام من الفرع';
+
 
   @override
   void initState() {
@@ -33,8 +33,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _lngController = TextEditingController(text: cart.lng);
     _notesController = TextEditingController(text: cart.notes);
     _promoController = TextEditingController(text: cart.promoCode);
-    _paymentMethod = cart.paymentMethod;
-    _deliveryMethod = cart.deliveryMethod;
+
   }
 
   @override
@@ -58,8 +57,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       lat: _latController.text.trim(),
       lng: _lngController.text.trim(),
     );
-    cart.setPaymentMethod(_paymentMethod);
-    cart.setDeliveryMethod(_deliveryMethod);
     cart.setNotes(_notesController.text.trim());
     cart.applyPromo(_promoController.text.trim());
 
@@ -187,7 +184,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red.shade700,
+                              backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 12),
@@ -247,7 +244,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: ElevatedButton(
                         onPressed: _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red.shade700,
+                          backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(

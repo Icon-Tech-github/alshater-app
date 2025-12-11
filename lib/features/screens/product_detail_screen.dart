@@ -1,4 +1,5 @@
 import 'package:alshaatir/core/app_colors.dart';
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:alshaatir/features/screens/widgets/floating_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,22 +43,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-                color: Colors.red.shade700,
-              ),
-              padding: const EdgeInsets.all(
-                  16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 40,),
-                  Text(product.name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white))
-                ],
-              ),
-            ),
+             DefaultHeader(title: product.name,height: 60,),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -199,7 +185,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade700,
+                            backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(

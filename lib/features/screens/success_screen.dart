@@ -1,7 +1,9 @@
+import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/app_colors.dart';
 import '../providers/cart_provider.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -17,33 +19,12 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   foregroundColor: Colors.black87,
-      //   elevation: 0.2,
-      //   title: const Text('تأكيد الطلب'),
-      //   centerTitle: true,
-      // ),
+
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-              color: Colors.red.shade700,
-            ),
-            padding: const EdgeInsets.all(
-                16),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 40,),
-                Text('تأكيد الطلب',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white))
-              ],
-            ),
-          ),
+          const DefaultHeader(title: 'تأكيد الطلب',height: 60,),
           const SizedBox(height: 32),
           Lottie.asset("assets/json/Success animation.json"),
           // Icon(Icons.check_circle,
@@ -124,7 +105,7 @@ class SuccessScreen extends StatelessWidget {
                   Navigator.popUntil(context, (route) => route.isFirst);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade700,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(

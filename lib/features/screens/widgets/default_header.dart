@@ -11,9 +11,17 @@ class DefaultHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32)),
-        color: AppColors.primary,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(32), bottomRight: Radius.circular(32)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColors.primary,
+            AppColors.info,
+          ],
+        ),
       ),
       padding: const EdgeInsets.all(
           16),

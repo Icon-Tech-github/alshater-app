@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart_provider.dart';
+import 'widgets/default_header.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -13,37 +14,40 @@ class OrdersScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('طلباتي'),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0.4,
-          bottom: const TabBar(
-            indicatorColor: AppColors.primary,
-            labelColor: AppColors.primary,
-            unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(text: 'السابقة'),
-              Tab(text: 'القادمة'),
-            ],
-          ),
-        ),
-        body: Consumer<CartProvider>(
-          builder: (context, cart, _) {
-            return TabBarView(
-              children: [
-                _OrdersList(
-                  orders: cart.previousOrders,
-                  emptyMessage: 'لا توجد طلبات سابقة حالياً',
-                ),
-                _OrdersList(
-                  orders: cart.upcomingOrders,
-                  emptyMessage: 'لا توجد طلبات قادمة حالياً',
-                ),
-              ],
-            );
-          },
+        body: Column(
+          children: [
+            const DefaultHeader(title: 'طلباتي', height: 60),
+            Container(
+              color: Colors.white,
+              child: const TabBar(
+                indicatorColor: AppColors.primary,
+                labelColor: AppColors.primary,
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(text: 'السابقة'),
+                  Tab(text: 'القادمة'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Consumer<CartProvider>(
+                builder: (context, cart, _) {
+                  return TabBarView(
+                    children: [
+                      _OrdersList(
+                        orders: cart.previousOrders,
+                        emptyMessage: 'لا توجد طلبات سابقة حالياً',
+                      ),
+                      _OrdersList(
+                        orders: cart.upcomingOrders,
+                        emptyMessage: 'لا توجد طلبات قادمة حالياً',
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: const BottomNav(currentIndex: 1),
       ),
