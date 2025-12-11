@@ -3,6 +3,7 @@ import 'package:alshaatir/features/screens/widgets/default_header.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
+import 'favorites_screen.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -11,7 +12,12 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      _MoreItem('المنتجات المفضلة', Iconsax.heart),
+      _MoreItem('المنتجات المفضلة', Iconsax.heart, onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+        );
+      }),
       _MoreItem('الإشعارات', Iconsax.notification),
       _MoreItem('العناوين', Iconsax.location),
       _MoreItem('الإعدادات', Iconsax.setting),
@@ -40,7 +46,7 @@ class MoreScreen extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                     ),
                     trailing: const Icon(Iconsax.arrow_left_2_copy,color: AppColors.primary,),
-                    onTap: () {},
+                    onTap: item.onTap,
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 8,),
@@ -98,8 +104,9 @@ class MoreScreen extends StatelessWidget {
 class _MoreItem {
   final String title;
   final IconData icon;
+  final VoidCallback? onTap;
 
-  _MoreItem(this.title, this.icon);
+  _MoreItem(this.title, this.icon, {this.onTap});
 }
 
 class _ActionTile extends StatelessWidget {

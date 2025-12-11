@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:alshaatir/core/app_colors.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -6,6 +7,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../models/category_model.dart';
 import '../../providers/cart_provider.dart';
+import '../../providers/favorites_provider.dart';
 import '../product_detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -43,17 +45,25 @@ class ProductCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (product.brandImage.isNotEmpty)
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.favorite_border, size: 18),
-                  ),
-                ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Consumer<FavoritesProvider>(
+                builder: (context, favs, _) {
+                  final isFav = favs.isFavorite(product.name);
+                  return GestureDetector(
+                    onTap: () => favs.toggleFavorite(product),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Icon(
+                        isFav ? Iconsax.heart : Iconsax.heart,
+                        size: 18,
+                        color: isFav ? AppColors.primary : Colors.grey,
+                      ),
+                    ),
+                  );
+                },
               ),
+            ),
             Center(
               child: SizedBox(
                 height: 70,
@@ -123,10 +133,10 @@ class ProductCard extends StatelessWidget {
                     ),
                     onPressed: () {
                       context.read<CartProvider>().addToCart(
-                        product,
-                        price: product.price,
-                        sizeLabel: 'قطعة',
-                      );
+                            product,
+                            price: product.price,
+                            sizeLabel: 'قطعة',
+                          );
                       showTopSnackBar(
                         Overlay.of(context),
                         CustomSnackBar.success(
